@@ -49,11 +49,11 @@ In document Prediction_Allhost, query viruses and probability for all bacterial 
 Short virus query sequence
 -----------
 If your input sequences contain sequences shorter than 12500 bp, the program will automatically identify these short segments and use the corresponding model to predict.  
-if 12500<length，The sequence will be predicted using a full length model;<br>  
-if 7500<length<=12500, The sequence will be predicted using a 10000bp model;<br>  
-if 4000<length<=7500, The sequence will be predicted using a 5000bp model;<br>  
-if 2500<length<=4000, The sequence will be predicted using a 3000bp model;<br>  
-if 1500<length<=2500, The sequence will be predicted using a 2000bp model;<br>  
-if 750<length<=1500, The sequence will be predicted using a 2000bp model;<br>  
-if length<=750, The sequence will be predicted using a 500bp model;<br>  
+if 12500bp<length，The sequence will be predicted using a full length model;<br>  
+if 7500bp<length<=12500bp, The sequence will be predicted using a 10000bp model;<br>  
+if 4000bp<length<=7500bp, The sequence will be predicted using a 5000bp model;<br>  
+if 2500bp<length<=4000bp, The sequence will be predicted using a 3000bp model;<br>  
+if 1500bp<length<=2500bp, The sequence will be predicted using a 2000bp model;<br>  
+if 750bp<length<=1500bp, The sequence will be predicted using a 2000bp model;<br>  
+if length<=750bp, The sequence will be predicted using a 500bp model;<br>  
 
