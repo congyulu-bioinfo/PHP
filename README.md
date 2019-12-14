@@ -2,6 +2,8 @@
 PhageHostPredictor (PHP) is a computational tool for host prediction of phages. PHP takes the complete or partial genomic sequences of phages as inputs. For each phage, PHP automatically calculates the probability of host for 36,600 bacterial species, and takes the bacterial species with the largest probability as the predicted host. PHP would output the name, the probability, and output the host probability of all bacterial genomes. <br>  
 Python packages "pandas","numpy","sklearn" are needed to be installed before Installation of phageHostPredictor. The program needs to run on the Linux operating system<br>  
 
+### Training process of model:
+The codes for building and testing of the RF models in this study are public available at https://github.com/congyulu-bioinfo/Training-process-of-phageHostPredictor.
 
 Dependencies:
 -----------
