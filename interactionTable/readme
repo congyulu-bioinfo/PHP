@@ -1,20 +1,20 @@
-VHM_PAIR_TAX.xls is the benchmark dataset of VirHostMatcher (doi: 10.1093/nar/gkw1002). 
+`VHM_PAIR_TAX.xls` is the benchmark dataset of VirHostMatcher (doi: 10.1093/nar/gkw1002). 
 The classification information has been updated according to NCBI information in July 2020.
 It contains 31,918 prokaryotic genomes and 1,426 virus-host interactions.
 
 
-TEST_PAIR_TAX.xls is the test dataset used in this paper. It was collected in February 2019
+`TEST_PAIR_TAX.xls` is the test dataset used in this paper. It was collected in February 2019
 It contains 60,105 prokaryotic genomes and 671 virus-host interactions. 
 
 
-MARGE_PAIR_TAX.xls is the marge of VHM benchmark dataset and test dataset. 
-It contains 60,105 prokaryotic genomes and 2097 virus-host interactions.
+`MARGE_PAIR_TAX.xls` is the marge of VHM benchmark dataset and test dataset. 
+It contains 60,105 prokaryotic genomes and 2,097 virus-host interactions.
 
 
-2020_PAIR_TAX_AFTER201902.xls contains 335 pairs of interactions newly submitted after February 2019
+`2020_PAIR_TAX_AFTER201902.xls` contains 335 pairs of interactions newly submitted after February 2019
 
 
-PRJNA492716_dataset.xls contains 139 interactions in the NCBI PRJNA492716 project (https://doi.org/10.1038/s41564-019-0526-2).
+`PRJNA492716_dataset.xls` contains 139 interactions in the NCBI PRJNA492716 project (https://doi.org/10.1038/s41564-019-0526-2).
 
 
 
