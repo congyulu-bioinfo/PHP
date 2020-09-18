@@ -17,7 +17,7 @@ Dependencies:
 
 Usage:
 -----------
-Step 1: calculate the *K*-mer frequency of the host
+### Step 1: calculate the *K*-mer frequency of the host
 
     python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer
 
@@ -29,7 +29,7 @@ Or use the simplify command
 >`--kmerFileDir` or `-d`: The path of prokaryotic *K*-mer file.<br>  
 >`--kmerName` or `-n`: The name of prokaryotic *K*-mer file.<br>  
 
-Step 2: predict the infection relationship between the virus and the host
+### Step 2: predict the infection relationship between the virus and the host
 
     python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer
 
