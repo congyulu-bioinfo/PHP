@@ -97,7 +97,11 @@ def main():
             print('--fastaFileDir or -f: The fasta file of prokaryotic genome sequences, one genome per file.')
             print('--kmerFileDir or -d: The path of prokaryotic K-mer file.')
             print('--kmerName or -n: The name of prokaryotic K-mer file.\n')
-            print('\n-----------------------------------------------------------------------------\n\n')
+            print('K-mer file of 60,105 prokaryotic genomes is saved in current folder and named hostKmer_60105_kmer4.')
+            print('Users can directly use the K-mer file to carry out the second step')
+            print('The taxonomy information of the 60,105 genomes is saved in /interactionTable/MARGE_PAIR_TAX.xls')
+
+            print('\n\n-------------------------------------------------\n\n')
             print('Step 2: predict the infection relationship between the virus and the host\n')
             print('    python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer\n')
             print('Or use the simplify command\n')

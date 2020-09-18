@@ -7,7 +7,7 @@ PHP would output the name of prokaryotic genome with the largest score, and outp
 Python packages `pandas`,`numpy`,`sklearn` are needed to be installed before Installation of phageHostPredictor. The program needs to run on the Linux operating system<br>  
 
 Dependencies:
------------
+===========
 ### Python 3, numpy, pandas, scikit-learn
 
     pip install pandas
@@ -16,8 +16,9 @@ Dependencies:
 
 
 Usage:
------------
-### Step 1: calculate the *K*-mer frequency of the host
+===========
+
+## Step 1: calculate the *K*-mer frequency of the host
 
     python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer
 
@@ -29,7 +30,11 @@ Or use the simplify command
 >`--kmerFileDir` or `-d`: The path of prokaryotic *K*-mer file.<br>  
 >`--kmerName` or `-n`: The name of prokaryotic *K*-mer file.<br>  
 
-### Step 2: predict the infection relationship between the virus and the host
+#### K-mer file of 60,105 prokaryotic genomes is saved in current folder and named `hostKmer_60105_kmer4`.<br>
+#### Users can directly use the *K*-mer file to run the step 2.<br>  
+#### The taxonomy information of the 60,105 genomes is saved in /interactionTable/MARGE_PAIR_TAX.xls<br>  <br>  
+
+## Step 2: predict the infection relationship between the virus and the host
 
     python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer
 
@@ -44,14 +49,15 @@ Or use the simplify command
 
 
 Interpretation of Result
------------
+===========
 After running the prediction program, you will see the output files Prediction_Maxhost and Prediction_Allhost in the output folder.<br>  
 >In document `Prediction_Maxhost.csv`, The first column is the input virus，The third column is the highest score host and the second is the score of this host. <br>  
 >In document `Prediction_Allhost.csv`, query viruses and scores for all prokaryotic genomes are given. <br>  
 
 
+
 Users use their own data to customize the model
------------
+===========
 Users can use their own data to train customized models, `/exampleTrainingData/` provides sample data, each folder containing one pair of viruses and host genomes in exampleTrainingData. <br>
 The virus needs to be saved in the `/phage/` folder, and the host needs to be saved in the `/host/` folder.<br>
 Then run the following command to automatically train to get the model
@@ -67,7 +73,8 @@ Users need to rename and replace the original PHP model to use the customized mo
 
 
 
-###predict short virus query contig
+predict short virus query contig
+-----------
 If your input sequences contain sequences shorter than 12500 bp, 
 the program will automatically identify these short segments and use the corresponding model to predict.  
 >if 12500bp< length，The sequence will be predicted using a full length model;<br>  
