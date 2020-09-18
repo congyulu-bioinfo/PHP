@@ -76,14 +76,28 @@ def main():
     modelName = 'UserModel.m'
     
     
-    opts, args = getopt.getopt(sys.argv[1:], "hv:h:o:c:",["trainDataDir=","outFileDir=","modelName="])
+    opts, args = getopt.getopt(sys.argv[1:], "ht:o:n:",["help=","trainDataDir=","outFileDir=","modelName="])
     for op, value in opts:
-        if   op == "--trainDataDir":
+        if   op == "--trainDataDir"  or op == "-t":
             trainDataDir = value+'/'
-        elif op == "--outFileDir":
+        elif op == "--outFileDir"  or op == "-o":
             outFileDir = value+'/'
-        elif op == "--modelName":
+        elif op == "--modelName"  or op == "-n":
             modelName = value
+        elif op == "--help"  or op == "-h":
+            print('Users can use their own data to train customized models, /exampleTrainingData/ provides sample data, ')
+            print('each folder containing one pair of viruses and host genomes in exampleTrainingData.')
+            print('The virus needs to be saved in the /phage/ folder, and the host needs to be saved in the /host/ folder.')
+            print('Then run the following command to automatically train to get the model')
+            print()
+            print('    python3 PHP_UserTrain.py --trainDataDir ./exampleTrainingData --outFileDir ./exampleOutput --modelName UserModel.m')
+            print()
+            print('--trainDataDir The training data folder, in which each pair of training data is saved in its own folder')
+            print('--outFileDir The path to save the trained model')
+            print('--modelName The name of the trained model')
+            print()
+            print('Users need to rename and replace the original PHP model to use the customized model')
+            return
             
     if not os.path.exists(outFileDir):
         os.mkdir(outFileDir)
@@ -99,7 +113,7 @@ if __name__ == '__main__':
     main()
     
     #python3 PHP_UserTrain.py --trainDataDir ./exampleTrainingData --outFileDir ./exampleOutput --modelName UserModel.m
-
+    #python3 PHP_UserTrain.py -t ./exampleTrainingData -o ./exampleOutput -n UserModel.m
 
 
 

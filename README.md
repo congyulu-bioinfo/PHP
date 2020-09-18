@@ -21,19 +21,26 @@ Step 1: calculate the *K*-mer frequency of the host
 
     python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer
 
->`--fastaFileDir` The fasta file of prokaryotic genome sequences, one genome per file.<br>  
->`--kmerFileDir` The path of prokaryotic *K*-mer file.<br>  
->`--kmerName` The name of prokaryotic *K*-mer file.<br>  
+Or use the simplify command
+
+    python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer
+
+>`--fastaFileDir` or `-f`: The fasta file of prokaryotic genome sequences, one genome per file.<br>  
+>`--kmerFileDir` or `-d`: The path of prokaryotic *K*-mer file.<br>  
+>`--kmerName` or `-n`: The name of prokaryotic *K*-mer file.<br>  
 
 Step 2: predict the infection relationship between the virus and the host
 
     python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer
 
->`--virusFastaFileDir`	The fasta file of query virus sequences, one virus genome per file.<br>  
->`--outFileDir` The path of temp files and result files.<br>  
->`--bacteriaKmerDir` The path of prokaryotic *K*-mer file.<br>  
->`--bacteriaKmerName` The name of prokaryotic *K*-mer file.<br>  
+Or use the simplify command
 
+    python3 PHP.py -v ./exampleVirusGenome  -o ./exampleOutput  -d ./exampleOutput  -n HostKmer
+
+>`--virusFastaFileDir` or `-v`: The fasta file of query virus sequences, one virus genome per file.<br>  
+>`--outFileDir` or `-o`: The path of temp files and result files.<br>  
+>`--bacteriaKmerDir` or `-d`: The path of prokaryotic *K*-mer file.<br>  
+>`--bacteriaKmerName` or `-n`: The name of prokaryotic *K*-mer file.<br>  
 
 
 Interpretation of Result

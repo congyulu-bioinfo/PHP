@@ -79,18 +79,35 @@ def main():
     scriptPath = sys.path[0]+'/'
     print(scriptPath)
     
-    opts, args = getopt.getopt(sys.argv[1:], "hv:h:o:c:",["virusFastaFileDir=","outFileDir=","bacteriaKmerDir=","bacteriaKmerName="])
+    opts, args = getopt.getopt(sys.argv[1:], "hv:o:d:n:",["help","virusFastaFileDir=","outFileDir=","bacteriaKmerDir=","bacteriaKmerName="])
     for op, value in opts:
-        if   op == "--virusFastaFileDir":
+        if   op == "--virusFastaFileDir" or op == "-v":
             virusFastaFileDir = value+'/'
-        elif op == "--outFileDir":
+        elif op == "--outFileDir"  or op == "-o":
             outFileDir = value+'/'
-        elif op == "--bacteriaKmerDir":
+        elif op == "--bacteriaKmerDir"  or op == "-d":
             bacteriaKmerDir = value+'/'
-        elif op == "--bacteriaKmerName":
+        elif op == "--bacteriaKmerName"  or op == "-n":
             bacteriaKmerName = value
-
-
+        elif op == "--help" or op == "-h":
+            print('Step 1: calculate the *K*-mer frequency of the host\n')
+            print('    python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer\n')
+            print('Or use the simplify command\n')
+            print('    python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer\n')
+            print('--fastaFileDir or -f: The fasta file of prokaryotic genome sequences, one genome per file.')
+            print('--kmerFileDir or -d: The path of prokaryotic K-mer file.')
+            print('--kmerName or -n: The name of prokaryotic K-mer file.\n')
+            print('\n-----------------------------------------------------------------------------\n\n')
+            print('Step 2: predict the infection relationship between the virus and the host\n')
+            print('    python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer\n')
+            print('Or use the simplify command\n')
+            print('    python3 PHP.py -v ./exampleVirusGenome  -o ./exampleOutput  -d ./exampleOutput  -n HostKmer\n')
+            print('--virusFastaFileDir or -v: The fasta file of query virus sequences, one virus genome per file.')
+            print('--outFileDir or -o: The path of temp files and result files.')
+            print('--bacteriaKmerDir or -d: The path of prokaryotic *K*-mer file.')
+            print('--bacteriaKmerName or -n: The name of prokaryotic *K*-mer file.')
+            return
+        
     if not os.path.exists(outFileDir):
         os.mkdir(outFileDir)
     if (not os.path.exists(virusFastaFileDir)) or virusFastaFileDir == '':
@@ -111,8 +128,11 @@ def main():
 if __name__ == '__main__':
     main()
     #python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer
-    #python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer
+    #python3 countKmer.py --f  ./exampleHostGenome --d ./exampleOutput --n HostKmer
     
+    
+    #python3 PHP.py --virusFastaFileDir ./exampleVirusGenome  --outFileDir ./exampleOutput  --bacteriaKmerDir ./exampleOutput  --bacteriaKmerName HostKmer
+    #python3 PHP.py -v ./exampleVirusGenome  -o ./exampleOutput  -d ./exampleOutput  -n HostKmer
     
     
     

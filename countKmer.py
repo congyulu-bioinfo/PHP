@@ -53,16 +53,24 @@ if __name__ == '__main__':
     bacteriaKmerName = ''
     
     ###user settings
-    opts, args = getopt.getopt(sys.argv[1:], "hv:h:o:c:",["fastaFileDir=","kmerFileDir=","kmerName="])
+    opts, args = getopt.getopt(sys.argv[1:], "hf:d:n:",["help","fastaFileDir=","kmerFileDir=","kmerName="])
     for op, value in opts:
-        if op == "--kmerFileDir":
-            outFileDir = value+'/'
-        elif op == "--fastaFileDir":
+        if op == "--fastaFileDir" or op == "-f":
             bacteriaFastaFileDir = value+'/'
-        elif op == "--kmerName":
+        elif op == "--kmerFileDir" or op == "-d":
+            outFileDir = value+'/'
+        elif op == "--kmerName" or op == "-n":
             bacteriaKmerName = value
-        
-        
+        elif op == "--help" or op == "-h":
+            print('Step 1: calculate the K-mer frequency of the host\n')
+            print('    python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer\n')
+            print('Or use the simplify command\n')
+            print('    python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer\n')
+            print('--fastaFileDir or -f: The fasta file of prokaryotic genome sequences, one genome per file.')
+            print('--kmerFileDir or -d: The path of prokaryotic K-mer file.')
+            print('--kmerName or -n: The name of prokaryotic K-mer file.\n')
+            sys.exit()
+            
     if not os.path.exists(outFileDir):
         os.mkdir(outFileDir)
     if bacteriaKmerName == '':
@@ -76,7 +84,7 @@ if __name__ == '__main__':
     print('done.')
     
     #python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer
-    
+    #python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer
     
     
     
