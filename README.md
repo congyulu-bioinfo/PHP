@@ -26,7 +26,7 @@ Or use the simplify command
 
     python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer
 
->`--fastaFileDir` or `-f`: The fasta file of prokaryotic genome sequences, one genome per file.<br>  
+>`--fastaFileDir` or `-f`: The fasta file of prokaryotic genome sequences, **one genome per file**.<br>  
 >`--kmerFileDir` or `-d`: The path of prokaryotic *K*-mer file.<br>  
 >`--kmerName` or `-n`: The name of prokaryotic *K*-mer file.<br>  
 
@@ -42,7 +42,7 @@ Or use the simplify command
 
     python3 PHP.py -v ./exampleVirusGenome  -o ./exampleOutput  -d ./exampleOutput  -n HostKmer
 
->`--virusFastaFileDir` or `-v`: The fasta file of query virus sequences, one virus genome per file.<br>  
+>`--virusFastaFileDir` or `-v`: The fasta file of query virus sequences, **one virus genome per file**.<br>  
 >`--outFileDir` or `-o`: The path of temp files and result files.<br>  
 >`--bacteriaKmerDir` or `-d`: The path of prokaryotic *K*-mer file.<br>  
 >`--bacteriaKmerName` or `-n`: The name of prokaryotic *K*-mer file.<br>  
