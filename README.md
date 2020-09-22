@@ -73,7 +73,7 @@ Users need to rename and replace the original PHP model to use the customized mo
 
 
 
-predict short virus query contig
+Predict short virus query contig
 -----------
 If your input sequences contain sequences shorter than 12500 bp, 
 the program will automatically identify these short segments and use the corresponding model to predict.  
