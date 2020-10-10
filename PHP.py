@@ -12,7 +12,7 @@ def predictVirusHost(scriptPath,bacteriaKmerDir,bacteriaKmerName,outFileDir,dicV
     hostAll = pd.read_csv(bacteriaKmerDir + bacteriaKmerName, sep=',', header=None, index_col=0).astype('float32')  # 全部的细菌基因组kmer
     listHostName = hostAll._stat_axis.values.tolist()  # 得到测试的宿主的名字列表
     print('bacteriaNum', len(listHostName))
-    fileOut = open(outFileDir + bacteriaKmerName + '_Prediction_Maxhost.csv', 'w')
+    fileOut = open(outFileDir + bacteriaKmerName + '_Prediction_Maxhost.tsv', 'w')
     fileOut.write( 'queryVirus\tscore\t_maxScoreHost\n')
     fileOutAll = open(outFileDir + bacteriaKmerName + '_Prediction_Allhost.csv','w')
     fileOutAll.write('host')
