@@ -1,32 +1,23 @@
-def getKmer(dirVirus,outDir,outName):
+def countFrequency(dirVirus,eachVirusName):
     import os
-    fileOut = open(outDir+'/'+outName,'w')
 
-    virusNameList = os.listdir(dirVirus)
-    N = len(virusNameList)
-    dicLength = {}
-    for n in range(N):
-        print('Counting kmer\t'+str(n+1)+'/'+str(N))
-        eachVirusName = virusNameList[n]
-        fileIn = open(dirVirus +'/'+ eachVirusName,'r')
-        textIn = fileIn.readlines()
-        fileIn.close()
-        seq = ''
-        for eachLine in textIn:
-            if '>' not in eachLine:
-                seq += eachLine.strip('\n')
-        dicts, seqLength = countKmerNum(seq)
-        dicLength[eachVirusName] = seqLength
-        
-        seqLength = float(seqLength)
-        fileOut.write(eachVirusName)
-        for eachItem in sorted(dicts.items(), key=lambda e: e[0]):
-            eachValue = eachItem[1]/(seqLength - 1)
-            fileOut.write(',' + '%.6f' % eachValue)
-        fileOut.write('\n')
-        
-    fileOut.close()
-    return dicLength
+    dicKmer = {}
+    fileIn = open(dirVirus +'/'+ eachVirusName,'r')
+    textIn = fileIn.readlines()
+    fileIn.close()
+    seq = ''
+    for eachLine in textIn:
+        if '>' not in eachLine:
+            seq += eachLine.strip('\n')
+    dicts, seqLength = countKmerNum(seq)
+    
+    seqLength = float(seqLength)
+    outList = [eachVirusName]
+    for eachItem in sorted(dicts.items(), key=lambda e: e[0]):
+        eachValue = eachItem[1]/(seqLength - 1)
+        outList.append('%.6f' % eachValue)
+    outLine = ','.join(outList)+'\n'
+    return eachVirusName,seqLength,outLine
     
 def countKmerNum(seq):
     seq = seq.upper()
@@ -41,7 +32,35 @@ def countKmerNum(seq):
     return dic_kmer4,seqLength
 
 
-
+def getKmer(dirVirus,dirOut,outName,coreNum):
+    import os
+    if int(coreNum)<=0:
+        coreNum=None
+    else:
+        coreNum=int(coreNum)
+    from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+    p = ProcessPoolExecutor(coreNum)
+    
+    virusNameList = os.listdir(dirVirus)
+    obj_l = []
+    for eachVirusName in virusNameList:
+        obj = p.submit(countFrequency, dirVirus,eachVirusName)
+        obj_l.append(obj)
+        
+    p.shutdown()
+    dicLength = {}
+    fileOut = open(dirOut+outName,'w')
+    for each in obj_l:
+        each = each.result()
+        eachName = each[0]
+        eachLength = each[1]
+        eachKmerLine = each[2]
+        dicLength[eachName] = eachLength
+        fileOut.write(eachKmerLine)
+    fileOut.close()
+    return dicLength
+    
+    
 if __name__ == '__main__':
     import datetime
     import os
@@ -51,9 +70,10 @@ if __name__ == '__main__':
     outName = 'hostkmer'
     bacteriaFastaFileDir = ''
     bacteriaKmerName = ''
+    coreNum = -1
     
     ###user settings
-    opts, args = getopt.getopt(sys.argv[1:], "hf:d:n:",["help","fastaFileDir=","kmerFileDir=","kmerName="])
+    opts, args = getopt.getopt(sys.argv[1:], "hf:d:n:c:",["help","fastaFileDir=","kmerFileDir=","kmerName=","coreNum="])
     for op, value in opts:
         if op == "--fastaFileDir" or op == "-f":
             bacteriaFastaFileDir = value+'/'
@@ -61,14 +81,17 @@ if __name__ == '__main__':
             outFileDir = value+'/'
         elif op == "--kmerName" or op == "-n":
             bacteriaKmerName = value
+        elif op == "--coreNum" or op == "-c":
+            coreNum = value
         elif op == "--help" or op == "-h":
-            print('Step 1: calculate the K-mer frequency of the host\n')
-            print('    python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer\n')
+            print('Step 1: calculate the k-mer frequency of the host\n')
+            print('    python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer --coreNum -1\n')
             print('Or use the simplify command\n')
-            print('    python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer\n')
+            print('    python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer -c -1\n')
             print('--fastaFileDir or -f: The fasta file of prokaryotic genome sequences, one genome per file.')
-            print('--kmerFileDir or -d: The path of prokaryotic K-mer file.')
-            print('--kmerName or -n: The name of prokaryotic K-mer file.\n')
+            print('--kmerFileDir or -d: The path of prokaryotic k-mer file.')
+            print('--kmerName or -n: The name of prokaryotic k-mer file.\n')
+            print('--coreNum or -c: The number of cores used in k-mer calculation. -1 represents the use of all cores\n')
             sys.exit()
             
     if not os.path.exists(outFileDir):
@@ -80,11 +103,11 @@ if __name__ == '__main__':
     else:
         print('counting kmer ...')
         
-        getKmer(bacteriaFastaFileDir,outFileDir,bacteriaKmerName)
+        getKmer(bacteriaFastaFileDir,outFileDir,bacteriaKmerName,coreNum)
     print('done.')
     
-    #python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer
-    #python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer
+    #python3 countKmer.py --fastaFileDir  ./exampleHostGenome --kmerFileDir ./exampleOutput --kmerName HostKmer --coreNum -1
+    #python3 countKmer.py -f ./exampleHostGenome -d ./exampleOutput -n HostKmer -c -1
     
     
     

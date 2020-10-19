@@ -22,7 +22,7 @@ def userTrain(trainDataDir,outFileDir,modelName):
             print('There is no phage genome in '+ virusDir+'\nbreak')
             return
         
-        os.system('python3 '+scriptPath+'countKmer.py --fastaFileDir  '+virusDir+' --kmerFileDir '+kmerDir+' --kmerName '+virusKmerName)
+        os.system('python3 '+scriptPath+'countKmer.py --fastaFileDir  '+virusDir+' --kmerFileDir '+kmerDir+' --kmerName '+virusKmerName+' --coreNum -1')
         
         #countHostKmer
         hostDir = trainDataDir+each+'/host/'
@@ -33,7 +33,7 @@ def userTrain(trainDataDir,outFileDir,modelName):
             print('There is no host genome in '+ hostDir+'\nbreak')
             return
         
-        os.system('python3 '+scriptPath+'countKmer.py --fastaFileDir  '+hostDir+' --kmerFileDir '+kmerDir+' --kmerName '+hostKmerName)
+        os.system('python3 '+scriptPath+'countKmer.py --fastaFileDir  '+hostDir+' --kmerFileDir '+kmerDir+' --kmerName '+hostKmerName+' --coreNum -1')
 
 
         #VirusKmerMinusHostKmer
@@ -65,8 +65,10 @@ def userTrain(trainDataDir,outFileDir,modelName):
     model.fit(text)
     joblib.dump(model, outFileDir + modelName)
     print('Model training completed.\n###  The model file '+modelName+' is saved in '+outFileDir)
-    print('###  please move the model file to ./PHP/model/FullLength/ to use.\ndone')
-
+    print('###  please move the model file to ./PHP/model/FullLength/ to use.')
+    print('Users need to rename and replace the original PHP model to use the customized model\ndone')
+    
+    
 def main():
     import pandas as pd
     import numpy  as np
