@@ -2,6 +2,7 @@ def predictVirusHost(scriptPath,bacteriaKmerDir,bacteriaKmerName,outFileDir,dicV
     import pandas as pd
     import numpy  as np
     import joblib
+    import heapq
     
     modelFullLength = joblib.load(scriptPath+'/model/FullLength/FullLength.m')
     model10k = joblib.load(scriptPath+'/model/10k/10k.m')
@@ -46,13 +47,12 @@ def predictVirusHost(scriptPath,bacteriaKmerDir,bacteriaKmerName,outFileDir,dicV
         dataVirusMinusAllHost = temp2.sub((temp1))
         
         pre = model.score_samples(dataVirusMinusAllHost)
-        tempMax = 0.0
-        for i in range(0,len(pre)):
-            if pre[i]>=tempMax: #选取最大的输出
-                tempMax = pre[i]
-                tempHost= listHostName[i]
+        LIST = list(zip(listHostName,pre))
+        maxScoreList = sorted(LIST,key=lambda x:float(x[1]),reverse=True)[:30]
         
-        fileOut.write( str(eachVirus) +'\t' + str(tempMax) + '\t' + str(tempHost)  + '\n')
+        for eachHostName,eachScore in maxScoreList:
+            if eachScore == maxScoreList[0][1]:
+                fileOut.write( str(eachVirus) +'\t' + str(eachScore) + '\t' + str(eachHostName)  + '\n')
         
         #outputAll
         tempMax = 0.0
