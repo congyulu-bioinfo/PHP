@@ -1,5 +1,5 @@
 # Prokaryotic virus Host Predictor (PHP)
-**Prokaryotic virus Host Predictor (PHP)** is a computational tool for host prediction of prokaryotic viruses based on **Gaussian Mixture Model (GMM)**. 
+**Prokaryotic virus Host Predictor (PHP)** is a computational tool for host prediction of prokaryotic viruses based on **Gaussian Model (GM)**. 
 PHP takes the complete or partial genomic sequences of prokaryotic viruses as inputs. For each virus sequence, 
 PHP automatically calculates the probability of host for 60,105 prokaryotic genomes, 
 and takes the prokaryotic genome with the largest probability as the predicted host. 
