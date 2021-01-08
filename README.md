@@ -55,7 +55,8 @@ After running the prediction program, you will see the output files Prediction_M
 >In document `Prediction_Maxhost.tsv`, The first column is the input virus，The third column is the highest score host and the second is the score of this host. <br>  
 >In document `Prediction_Allhost.csv`, query viruses and scores for all prokaryotic genomes are given. <br>  
 
-
+![image](https://github.com/congyulu-bioinfo/PHP/blob/master/table1.png)<br>  
+![image](https://github.com/congyulu-bioinfo/PHP/blob/master/table2.png)<br>  
 
 Users use their own data to customize the model
 ===========
